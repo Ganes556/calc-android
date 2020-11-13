@@ -19,6 +19,7 @@
         tools:ignore="MissingConstraints" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="360dp"
         android:layout_height="425dp"
         android:orientation="vertical"
@@ -57,10 +58,10 @@
 
                 android:layout_marginStart="2dp"
                 android:background="@drawable/button_circle"
-                android:text="Delete" />
+                android:text="CR" />
 
             <Button
-                android:id="@+id/buttonDevide"
+                android:id="@+id/buttonDivide"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
@@ -76,26 +77,29 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/buttonSeven"
+                android:id="@+id/button7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_circle"
+                android:onClick="onClickNumbering"
                 android:text="7" />
 
             <Button
-                android:id="@+id/buttonEight"
+                android:id="@+id/button8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
                 android:background="@drawable/button_circle"
+                android:onClick="onClickNumbering"
                 android:text="8" />
 
             <Button
-                android:id="@+id/buttonNine"
+                android:id="@+id/button9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
                 android:background="@drawable/button_circle"
+                android:onClick="onClickNumbering"
                 android:text="9" />
 
             <Button
@@ -114,26 +118,29 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/buttonFour"
+                android:id="@+id/button4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_circle"
+                android:onClick="onClickNumbering"
                 android:text="4" />
 
             <Button
-                android:id="@+id/buttonFive"
+                android:id="@+id/button5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
                 android:background="@drawable/button_circle"
+                android:onClick="onClickNumbering"
                 android:text="5" />
 
             <Button
-                android:id="@+id/buttonSix"
+                android:id="@+id/button6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
                 android:background="@drawable/button_circle"
+                android:onClick="onClickNumbering"
                 android:text="6" />
 
             <Button
@@ -152,26 +159,29 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/buttonOne"
+                android:id="@+id/button1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_circle"
+                android:onClick="onClickNumbering"
                 android:text="1" />
 
             <Button
-                android:id="@+id/buttonTwo"
+                android:id="@+id/button2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
                 android:background="@drawable/button_circle"
+                android:onClick="onClickNumbering"
                 android:text="2" />
 
             <Button
-                android:id="@+id/buttonThree"
+                android:id="@+id/button3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
                 android:background="@drawable/button_circle"
+                android:onClick="onClickNumbering"
                 android:text="3" />
 
             <Button
@@ -190,10 +200,11 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/buttonZero"
+                android:id="@+id/button0"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_circle"
+                android:onClick="onClickNumbering"
                 android:text="0" />
 
             <Button
@@ -202,6 +213,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
                 android:background="@drawable/button_circle"
+                android:onClick="onClickNumbering"
                 android:text="." />
 
             <Button
@@ -215,6 +227,33 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <HorizontalScrollView
+        android:id="@+id/hzw"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start|end"
+        android:layout_marginEnd="10dp"
+        android:fillViewport="true"
+        android:scrollbarAlwaysDrawHorizontalTrack="true"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="end"
+            android:hint="0"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:maxLines="1"
+            android:textSize="72sp"
+            android:textStyle="bold" />
+
+    </HorizontalScrollView>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
