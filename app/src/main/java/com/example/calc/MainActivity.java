@@ -7,24 +7,19 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.Switch;
 
 
-public class MainActivity extends AppCompatActivity {
-
+public class MainActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
+    private  ConstraintLayout constlay;
+    private Switch switchButton;
+    // Switch control
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-    }
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-    public void switch1(View view){
-        Switch switchButton;
-        ConstraintLayout constlay;
-
-        constlay = (ConstraintLayout ) findViewById(R.id.constLay);
-        switchButton = (Switch) findViewById(R.id.switch1);
-        boolean darkMode = switchButton.isChecked();
+        // on switch had true
+        boolean darkMode = isChecked;
         if(darkMode){
             // switch Button
             switchButton.setText("Dark");
@@ -41,6 +36,17 @@ public class MainActivity extends AppCompatActivity {
             // constraint layout
             constlay.setBackgroundColor(Color.parseColor("#FFFFFF"));
         }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        constlay = findViewById(R.id.constLay);
+        switchButton = findViewById(R.id.switch1);
+
+        switchButton.setOnCheckedChangeListener(this);
     }
 
 }

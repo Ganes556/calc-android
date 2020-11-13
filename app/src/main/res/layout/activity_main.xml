@@ -13,28 +13,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#FFFFFF"
-        android:onClick="switch1"
-        android:shadowColor="#FF0000"
-        android:switchTextAppearance="@style/SwitchAppearance"
         android:text="Light"
-        android:textColor="#000000"
-        android:textColorHighlight="#FFFFFF"
-        android:textOff="OFF"
-        android:textOn="ON"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        tools:ignore="MissingConstraints" />
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="160dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="360dp"
+        android:layout_height="425dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -49,7 +39,6 @@
                 android:id="@+id/buttonClear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="21dp"
                 android:background="@drawable/button_circle"
                 android:text="C" />
 
@@ -57,7 +46,7 @@
                 android:id="@+id/buttonPercent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
+                android:layout_marginStart="2dp"
                 android:background="@drawable/button_circle"
                 android:text="%" />
 
@@ -66,16 +55,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                android:layout_marginStart="6dp"
+                android:layout_marginStart="2dp"
                 android:background="@drawable/button_circle"
-                android:text="<<" />
+                android:text="Delete" />
 
             <Button
                 android:id="@+id/buttonDevide"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:layout_marginEnd="21dp"
+                android:layout_marginStart="2dp"
                 android:background="@drawable/button_circle"
                 android:text="/" />
 
@@ -91,7 +79,6 @@
                 android:id="@+id/buttonSeven"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="21dp"
                 android:background="@drawable/button_circle"
                 android:text="7" />
 
@@ -99,7 +86,7 @@
                 android:id="@+id/buttonEight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
+                android:layout_marginStart="2dp"
                 android:background="@drawable/button_circle"
                 android:text="8" />
 
@@ -107,7 +94,7 @@
                 android:id="@+id/buttonNine"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
+                android:layout_marginStart="2dp"
                 android:background="@drawable/button_circle"
                 android:text="9" />
 
@@ -115,8 +102,7 @@
                 android:id="@+id/buttonMultiple"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:layout_marginEnd="21dp"
+                android:layout_marginStart="2dp"
                 android:background="@drawable/button_circle"
                 android:text="*" />
         </LinearLayout>
@@ -131,7 +117,6 @@
                 android:id="@+id/buttonFour"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="21dp"
                 android:background="@drawable/button_circle"
                 android:text="4" />
 
@@ -139,7 +124,7 @@
                 android:id="@+id/buttonFive"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
+                android:layout_marginStart="2dp"
                 android:background="@drawable/button_circle"
                 android:text="5" />
 
@@ -147,7 +132,7 @@
                 android:id="@+id/buttonSix"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
+                android:layout_marginStart="2dp"
                 android:background="@drawable/button_circle"
                 android:text="6" />
 
@@ -155,8 +140,7 @@
                 android:id="@+id/buttonSubtract"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:layout_marginEnd="21dp"
+                android:layout_marginStart="2dp"
                 android:background="@drawable/button_circle"
                 android:text="-" />
         </LinearLayout>
@@ -171,7 +155,6 @@
                 android:id="@+id/buttonOne"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="21dp"
                 android:background="@drawable/button_circle"
                 android:text="1" />
 
@@ -179,7 +162,7 @@
                 android:id="@+id/buttonTwo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
+                android:layout_marginStart="2dp"
                 android:background="@drawable/button_circle"
                 android:text="2" />
 
@@ -187,7 +170,7 @@
                 android:id="@+id/buttonThree"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
+                android:layout_marginStart="2dp"
                 android:background="@drawable/button_circle"
                 android:text="3" />
 
@@ -195,8 +178,7 @@
                 android:id="@+id/buttonAdd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:layout_marginEnd="21dp"
+                android:layout_marginStart="2dp"
                 android:background="@drawable/button_circle"
                 android:text="+" />
         </LinearLayout>
@@ -211,7 +193,6 @@
                 android:id="@+id/buttonZero"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="21dp"
                 android:background="@drawable/button_circle"
                 android:text="0" />
 
@@ -219,7 +200,7 @@
                 android:id="@+id/buttonComma"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
+                android:layout_marginStart="2dp"
                 android:background="@drawable/button_circle"
                 android:text="." />
 
@@ -227,8 +208,7 @@
                 android:id="@+id/buttonSum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:layout_marginEnd="21dp"
+                android:layout_marginStart="2dp"
                 android:layout_weight="1"
                 android:background="@drawable/button_circle"
                 android:text="=" />
