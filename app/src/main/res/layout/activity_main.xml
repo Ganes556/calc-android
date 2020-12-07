@@ -5,23 +5,24 @@
     android:id="@+id/constLay"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="#2B2B2B"
     tools:context=".MainActivity">
 
-    <Switch
-        android:id="@+id/switch1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#FFFFFF"
-        android:text="Light"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints" />
+<!--    <Switch-->
+<!--        android:id="@+id/switch1"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="#FFFFFF"-->
+<!--        android:text="Light"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        tools:ignore="MissingConstraints" />-->
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/boardBtn"
         android:layout_width="360dp"
         android:layout_height="425dp"
+        android:background="#2B2B2B"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,42 +32,54 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="1dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="1dp"
             android:layout_marginBottom="1dp"
             android:orientation="horizontal">
+
 
             <Button
                 android:id="@+id/buttonClear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_circle"
-                android:text="C" />
+                android:background="@drawable/ellipse_yellow"
+                android:text="C"
+                android:onClick="onClickOperator"
+                android:textColor="#FFFFFF"
+                android:textSize="36sp" />
 
             <Button
                 android:id="@+id/buttonPercent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
-                android:background="@drawable/button_circle"
-                android:text="%" />
+                android:background="@drawable/ellipse_yellow"
+                android:text="%"
+                android:textColor="#FFFFFF"
+                android:textSize="36sp"
+                android:onClick="onClickOperator"/>
 
             <Button
                 android:id="@+id/buttonDelete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:layout_marginStart="2dp"
-                android:background="@drawable/button_circle"
-                android:text="CR" />
+                android:background="@drawable/ellipse_yellow"
+                android:text="CR"
+                android:textColor="#FFFFFF"
+                android:textSize="36sp"
+                android:onClick="onClickOperator"/>
 
             <Button
                 android:id="@+id/buttonDivide"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
-                android:background="@drawable/button_circle"
-                android:text="/" />
+                android:background="@drawable/ellipse_yellow"
+                android:text="/"
+                android:textColor="#FFFFFF"
+                android:textSize="36sp"
+                android:onClick="onClickOperator"/>
 
         </LinearLayout>
 
@@ -80,35 +93,44 @@
                 android:id="@+id/button7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_circle"
+                android:background="@drawable/ellipse_number"
                 android:onClick="onClickNumbering"
-                android:text="7" />
+                android:text="7"
+                android:textColor="#FFFFFF"
+                android:textSize="36sp" />
 
             <Button
                 android:id="@+id/button8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
-                android:background="@drawable/button_circle"
+                android:background="@drawable/ellipse_number"
                 android:onClick="onClickNumbering"
-                android:text="8" />
+                android:text="8"
+                android:textColor="#FFFFFF"
+                android:textSize="36sp" />
 
             <Button
                 android:id="@+id/button9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
-                android:background="@drawable/button_circle"
+                android:background="@drawable/ellipse_number"
                 android:onClick="onClickNumbering"
-                android:text="9" />
+                android:text="9"
+                android:textColor="#FFFFFF"
+                android:textSize="36sp" />
 
             <Button
                 android:id="@+id/buttonMultiple"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
-                android:background="@drawable/button_circle"
-                android:text="*" />
+                android:background="@drawable/ellipse_yellow"
+                android:text="*"
+                android:textColor="#FFFFFF"
+                android:textSize="36sp"
+                android:onClick="onClickOperator"/>
         </LinearLayout>
 
         <LinearLayout
@@ -121,35 +143,44 @@
                 android:id="@+id/button4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_circle"
+                android:background="@drawable/ellipse_number"
                 android:onClick="onClickNumbering"
-                android:text="4" />
+                android:text="4"
+                android:textColor="#FFFFFF"
+                android:textSize="36sp" />
 
             <Button
                 android:id="@+id/button5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
-                android:background="@drawable/button_circle"
+                android:background="@drawable/ellipse_number"
                 android:onClick="onClickNumbering"
-                android:text="5" />
+                android:text="5"
+                android:textColor="#FFFFFF"
+                android:textSize="36sp" />
 
             <Button
                 android:id="@+id/button6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
-                android:background="@drawable/button_circle"
+                android:background="@drawable/ellipse_number"
                 android:onClick="onClickNumbering"
-                android:text="6" />
+                android:text="6"
+                android:textColor="#FFFFFF"
+                android:textSize="36sp" />
 
             <Button
                 android:id="@+id/buttonSubtract"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
-                android:background="@drawable/button_circle"
-                android:text="-" />
+                android:background="@drawable/ellipse_yellow"
+                android:text="-"
+                android:textColor="#FFFFFF"
+                android:textSize="36sp"
+                android:onClick="onClickOperator"/>
         </LinearLayout>
 
         <LinearLayout
@@ -162,35 +193,44 @@
                 android:id="@+id/button1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_circle"
+                android:background="@drawable/ellipse_number"
                 android:onClick="onClickNumbering"
-                android:text="1" />
+                android:text="1"
+                android:textColor="#FFFFFF"
+                android:textSize="36sp" />
 
             <Button
                 android:id="@+id/button2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
-                android:background="@drawable/button_circle"
+                android:background="@drawable/ellipse_number"
                 android:onClick="onClickNumbering"
-                android:text="2" />
+                android:text="2"
+                android:textColor="#FFFFFF"
+                android:textSize="36sp" />
 
             <Button
                 android:id="@+id/button3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
-                android:background="@drawable/button_circle"
+                android:background="@drawable/ellipse_number"
                 android:onClick="onClickNumbering"
-                android:text="3" />
+                android:text="3"
+                android:textColor="#FFFFFF"
+                android:textSize="36sp" />
 
             <Button
                 android:id="@+id/buttonAdd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
-                android:background="@drawable/button_circle"
-                android:text="+" />
+                android:background="@drawable/ellipse_yellow"
+                android:text="+"
+                android:textColor="#FFFFFF"
+                android:textSize="36sp"
+                android:onClick="onClickOperator"/>
         </LinearLayout>
 
         <LinearLayout
@@ -203,18 +243,22 @@
                 android:id="@+id/button0"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_circle"
+                android:background="@drawable/ellipse_number"
                 android:onClick="onClickNumbering"
-                android:text="0" />
+                android:text="0"
+                android:textColor="#FFFFFF"
+                android:textSize="36sp" />
 
             <Button
                 android:id="@+id/buttonComma"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
-                android:background="@drawable/button_circle"
+                android:background="@drawable/ellipse_number"
                 android:onClick="onClickNumbering"
-                android:text="." />
+                android:text="."
+                android:textColor="#FFFFFF"
+                android:textSize="36sp" />
 
             <Button
                 android:id="@+id/buttonSum"
@@ -222,8 +266,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
                 android:layout_weight="1"
-                android:background="@drawable/button_circle"
-                android:text="=" />
+                android:background="@drawable/yellow_sum"
+                android:text="="
+                android:textColor="#FFFFFF"
+                android:textSize="36sp"
+                android:onClick="onClickOperator"/>
         </LinearLayout>
 
     </LinearLayout>
@@ -236,7 +283,7 @@
         android:layout_marginEnd="10dp"
         android:fillViewport="true"
         android:scrollbarAlwaysDrawHorizontalTrack="true"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintBottom_toTopOf="@+id/boardBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -244,16 +291,17 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="end"
-            android:hint="0"
             android:focusable="true"
             android:focusableInTouchMode="true"
+            android:gravity="end"
+            android:hint="0"
             android:maxLines="1"
+            android:textColor="@android:color/white"
             android:textSize="72sp"
             android:textStyle="bold" />
 
-    </HorizontalScrollView>
 
+    </HorizontalScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
