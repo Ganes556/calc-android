@@ -45,13 +45,14 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
 
     @Override
     public boolean onLongClick(View v) {
-        TextView displayed = findViewById(R.id.textView);
-
+        TextView displayed = binding.textView;
+        TextView displayed2 = binding.textView2;
         switch(v.getId()){
             // light mode
             case R.id.buttonClear:
                 if(lightMod){
                     displayed.setTextColor(Color.parseColor("#282828"));
+                    displayed2.setTextColor(Color.parseColor("#282828"));
 
                     btnClear.setBackgroundResource(R.drawable.ellipse_purple);
                     btnDelete.setBackgroundResource(R.drawable.ellipse_purple);
@@ -68,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
                     this.lightMod = false;
                 }else{
                     displayed.setTextColor(Color.parseColor("#FFFFFF"));
+                    displayed2.setTextColor(Color.parseColor("#FFFFFF"));
 
                     btnClear.setBackground(ContextCompat.getDrawable(MainActivity.this,R.drawable.ellipse_yellow));
                     btnDelete.setBackgroundResource(R.drawable.ellipse_yellow);
@@ -128,17 +130,25 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
 
     }
 
+    private char operatorSet = '\0';
 
     public void onClickNumbering(View v){
         textView = binding.textView;
         String displayNumber = textView.getText().toString();
         // change size text number if length number is 12
         if(displayNumber.length() == 12){
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,36);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,62);
+        }
+        if(operatorSet != '\0'){
+            displayNumber = "";
+            operatorSet = '\0';
         }
         // force scroll to right
         HorizontalScrollView hrw = binding.hzw;
         hrw.fullScroll(View.FOCUS_RIGHT);
+
+        HorizontalScrollView hrw2 = binding.hzw2;
+        hrw2.fullScroll(View.FOCUS_RIGHT);
         // numbering button had a same behavior
         for (int i = 0; i < 10; i++) {
             int id = getResources().getIdentifier("button"+i, "id", getPackageName());
@@ -155,24 +165,49 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
     }
 
 
-    // next build click for all operator adding
+
+    private float value = 0f;
+    // check operator for sum
+    private char sumType;
     public void onClickOperator(View v){
-        String text = textView.getText().toString();
-        switch (v.getId()){
-            case R.id.buttonClear:
-                textView.setText("");
-                break;
-            case R.id.buttonAdd:
-                // checked last char for add symbol cannot duplicate in same times
-                String lastChar = text.substring(text.length()-1);
-                if(!lastChar.equals(" ")) {
-                    textView.setText(text + " + ");
-                }
-                break;
-            case R.id.buttonSum:
-                System.out.println(text.length());
-                break;
-        }
+
+        try {
+           String text = textView.getText().toString();
+           String text2 = binding.textView2.getText().toString();
+            switch (v.getId()){
+                case R.id.buttonClear:
+                    textView.setText("");
+                    binding.textView2.setText("");
+                    break;
+
+                case R.id.buttonAdd:
+                    // checked last char for add symbol cannot duplicate in same times
+
+//                    String lastChar = text.substring(text.length()-1);
+//                    if(!lastChar.equals(" ")) {
+                    binding.textView2.setText(text2 + text + " + ");
+                    value += Float.parseFloat(text);
+                    operatorSet = '+';
+                    sumType = '+';
+//                    }
+                    break;
+
+                case R.id.buttonSum:
+
+                    switch (sumType){
+                        case '+':
+                            System.out.println(text);
+                            value += Float.parseFloat(text);
+                            textView.setText(String.valueOf(this.value));
+                            operatorSet = '+';
+                            this.value = 0;
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+        }catch (Exception e){}
     }
 
 
