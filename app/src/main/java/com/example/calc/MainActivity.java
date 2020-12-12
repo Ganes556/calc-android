@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.calc.databinding.ActivityMainBinding;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +32,8 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
     // variable used in many function
     private ConstraintLayout constlay;
     private LinearLayout boardOfBtn;
-    private TextView textView;
+    private TextView inputOutput;
+    private TextView operatorView;
     private boolean lightMod = true;
 
     private Button btnClear;
@@ -132,17 +134,22 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
 
     private char operatorSet = '\0';
 
+//    private boolean operatorNonKomulatif;
     public void onClickNumbering(View v){
-        textView = binding.textView;
-        String displayNumber = textView.getText().toString();
+        inputOutput = binding.textView;
+        operatorView = binding.textView2;
+
+        String displayNumber = inputOutput.getText().toString();
         // change size text number if length number is 12
         if(displayNumber.length() == 12){
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,62);
+            inputOutput.setTextSize(TypedValue.COMPLEX_UNIT_SP,62);
         }
+
         if(operatorSet != '\0'){
             displayNumber = "";
             operatorSet = '\0';
         }
+
         // force scroll to right
         HorizontalScrollView hrw = binding.hzw;
         hrw.fullScroll(View.FOCUS_RIGHT);
@@ -153,11 +160,14 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         for (int i = 0; i < 10; i++) {
             int id = getResources().getIdentifier("button"+i, "id", getPackageName());
             if(v.getId() == id){
-                textView.setText(displayNumber + i);
+                if(displayNumber.equals("0")){
+                    displayNumber = "";
+                }
+                inputOutput.setText(displayNumber + i);
                 break;
             }
-            if(v.getId() == R.id.buttonComma){
-                textView.setText(displayNumber + ".");
+            if(v.getId() == R.id.buttonComma && !displayNumber.contains(".")){
+                inputOutput.setText(displayNumber + ".");
                 break;
             }
 
@@ -166,44 +176,125 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
 
 
 
-    private float value = 0f;
+
     // check operator for sum
+    private double num,ans;
     private char sumType;
     public void onClickOperator(View v){
 
         try {
-           String text = textView.getText().toString();
-           String text2 = binding.textView2.getText().toString();
+           String textInputOutput = inputOutput.getText().toString();
+           String textOperator = operatorView.getText().toString();
             switch (v.getId()){
                 case R.id.buttonClear:
-                    textView.setText("");
-                    binding.textView2.setText("");
+                    inputOutput.setText("0");
+                    operatorView.setText("");
+                    break;
+                case R.id.buttonDelete:
+                    int length = textInputOutput.length();
+                    int number = length-1;
+
+                    if(length > 1){
+                        StringBuilder willDelete = new StringBuilder(textInputOutput);
+                        willDelete.deleteCharAt(number);
+                        String store = willDelete.toString();
+                        inputOutput.setText(store);
+                    }else if(length == 1){
+                        inputOutput.setText("0");
+                    }
                     break;
 
                 case R.id.buttonAdd:
                     // checked last char for add symbol cannot duplicate in same times
-
-//                    String lastChar = text.substring(text.length()-1);
-//                    if(!lastChar.equals(" ")) {
-                    binding.textView2.setText(text2 + text + " + ");
-                    value += Float.parseFloat(text);
+                    num = Double.parseDouble(textInputOutput);
+                    inputOutput.setText("");
+                    operatorView.setText(textOperator + textInputOutput + " + ");
                     operatorSet = '+';
                     sumType = '+';
-//                    }
+                    break;
+                case R.id.buttonSubtract:
+                    num = Double.parseDouble(textInputOutput);
+                    inputOutput.setText("");
+                    operatorView.setText(textOperator + textInputOutput + " - ");
+                    operatorSet = '-';
+                    sumType = '-';
+                    break;
+                case R.id.buttonMultiple:
+                    num = Double.parseDouble(textInputOutput);
+                    inputOutput.setText("");
+                    operatorView.setText(textOperator + textInputOutput + " * ");
+                    operatorSet = '*';
+                    sumType = '*';
+                    break;
+                case R.id.buttonDivide:
+                    num = Double.parseDouble(textInputOutput);
+                    inputOutput.setText("");
+                    operatorView.setText(textOperator + textInputOutput + " " + '\u00F7' + " ");
+                    operatorSet = '/';
+                    sumType = '/';
+                    break;
+
+                case R.id.buttonPercent:
+                    num = Double.parseDouble(textInputOutput)*0.01;
+
+                    inputOutput.setText(textOperator + String.format("%.2f", num).replace(',','.'));
+                    operatorSet = '%';
+                    sumType = '%';
                     break;
 
                 case R.id.buttonSum:
-
                     switch (sumType){
                         case '+':
-                            System.out.println(text);
-                            value += Float.parseFloat(text);
-                            textView.setText(String.valueOf(this.value));
+                            ans = num + Double.parseDouble(textInputOutput);
+                            if(textOperator.contains(".")){
+                                inputOutput.setText(Double.toString(ans));
+                            }else{
+                                int sumInteger = (int) ans;
+                                inputOutput.setText(Integer.toString(sumInteger));
+                            }
+
+//                            inputOutput.setText(String.valueOf(this.value));
+                            operatorView.setText("");
                             operatorSet = '+';
-                            this.value = 0;
+                            break;
+
+                        case '-':
+                            ans = num - Double.parseDouble(textInputOutput);
+                            if(textOperator.contains(".")){
+                                inputOutput.setText(Double.toString(ans));
+                            }else{
+                                int sumInteger = (int) ans;
+                                inputOutput.setText(Integer.toString(sumInteger));
+                            }
+                            operatorView.setText("");
+                            operatorSet = '-';
+                            break;
+                        case '*':
+                            ans = num * Double.parseDouble(textInputOutput);
+                            if(textOperator.contains(".")){
+                                inputOutput.setText(Double.toString(ans));
+                            }else{
+                                int sumInteger = (int) ans;
+                                inputOutput.setText(Integer.toString(sumInteger));
+                            }
+                            operatorView.setText("");
+                            operatorSet = '*';
+                            break;
+
+                        case '/':
+                            ans = num / Double.parseDouble(textInputOutput);
+                            if(textOperator.contains(".") || Double.toString(ans).contains(".")){
+                                inputOutput.setText(Double.toString(ans));
+                            }else{
+                                int sumInteger = (int) ans;
+                                inputOutput.setText(Integer.toString(sumInteger));
+                            }
+                            operatorView.setText("");
+                            operatorSet = '/';
+                            break;
+
                     }
                     break;
-
                 default:
                     break;
             }
