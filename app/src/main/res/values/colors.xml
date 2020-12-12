@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+
+    <!-- Light Mode Color -->
+    <color name="lightModeBtnOutside">#962BEC</color>
+    <color name="lightModeBtnInside">#242424</color>
+    <color name="lightModeText">#151515</color>
+    <color name="lightModeBG">#FFFFFF</color>
+
+    <!-- Dark Mode Color -->
+    <color name="darkModeBtnOutside">#FEB92D</color>
+    <color name="darkModeBtnInside">#666666</color>
+    <color name="darkModeText">#FFFFFF</color>
+    <color name="darkModeBG">#2B2B2B</color>
+</resources>
