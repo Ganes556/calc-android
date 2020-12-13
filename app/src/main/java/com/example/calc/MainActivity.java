@@ -16,7 +16,7 @@ import static com.example.calc.R.color.lightModeText;
 import static com.example.calc.R.drawable;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Theme {
     private ActivityMainBinding binding;
 
     public static final String THEME_PREFS = "themePrefs";
@@ -40,14 +40,15 @@ public class MainActivity extends AppCompatActivity {
                     isDarkMode = true;
                     saveTheme();
                 }
-                updateView();
+                viewThemeUpdate();
                 return true;
             }
         });
         loadTheme();
-        updateView();
+        viewThemeUpdate();
     }
 
+    @Override
     public void darkMode() {
         binding.viewTxt.setTextColor(getResources().getColor(darkModeText));
         binding.typeTxt.setTextColor(getResources().getColor(darkModeText));
@@ -73,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
         binding.btnNine.setBackgroundResource(drawable.btn_inside_style_dark);
     }
 
+    @Override
     public void lightMode() {
         binding.viewTxt.setTextColor(getResources().getColor(lightModeText));
         binding.typeTxt.setTextColor(getResources().getColor(lightModeText));
@@ -111,12 +113,14 @@ public class MainActivity extends AppCompatActivity {
         editor.apply();
     }
 
+    @Override
     public void loadTheme() {
         SharedPreferences sharedPreferences = getSharedPreferences(THEME_PREFS, MODE_PRIVATE);
         isDarkMode = sharedPreferences.getBoolean(KEY_THEME_UPDATE, true);
     }
 
-    public void updateView() {
+    @Override
+    public void viewThemeUpdate() {
         if (isDarkMode) {
             darkMode();
         } else if (!isDarkMode) {
