@@ -1,323 +1,308 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/constLay"
+    android:id="@+id/bgMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2B2B2B"
+    android:background="@color/darkModeBG"
+    android:paddingHorizontal="10dp"
+    android:paddingVertical="20dp"
     tools:context=".MainActivity">
 
-
-    <LinearLayout
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/hzw2"
         android:id="@+id/boardBtn"
-        android:layout_width="360dp"
-        android:layout_height="425dp"
-        android:background="#2B2B2B"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="1dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="1dp"
-            android:layout_marginBottom="1dp"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-            <Button
-                android:id="@+id/buttonClear"
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnC"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/btn_outside_style_dark"
+                    android:text="C"
+                    android:textColor="@color/darkModeText"
+                    android:textSize="36sp" 
+                    android:onClick="onClickOperator"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnPercent"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/btn_outside_style_dark"
+                    android:text="%"
+                    android:textColor="@color/darkModeText"
+                    android:textSize="36sp"
+                    android:onClick="onClickOperator"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnDelete"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/btn_outside_style_dark"
+                    android:text="⌫ "
+                    android:textColor="@color/darkModeText"
+                    android:textSize="36sp"
+                    android:onClick="onClickOperator"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnDivide"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/btn_outside_style_dark"
+                    android:text="÷"
+                    android:textColor="@color/darkModeText"
+                    android:textSize="36sp"
+                    android:onClick="onClickOperator"/>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/ellipse_yellow"
-                android:text="C"
-                android:onClick="onClickOperator"
-                android:textColor="#FFFFFF"
-                android:textSize="36sp" />
+                android:layout_marginTop="10dp">
 
-            <Button
-                android:id="@+id/buttonPercent"
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn7"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/btn_inside_style_dark"
+                    android:text="7"
+                    android:textColor="@color/darkModeText"
+                    android:textSize="36sp"
+                    android:onClick="onClickNumbering"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn8"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/btn_inside_style_dark"
+                    android:text="8"
+                    android:textColor="@color/darkModeText"
+                    android:textSize="36sp"
+                    android:onClick="onClickNumbering"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn9"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/btn_inside_style_dark"
+                    android:text="9"
+                    android:textColor="@color/darkModeText"
+                    android:textSize="36sp"
+                    android:onClick="onClickNumbering">
+
+                </androidx.appcompat.widget.AppCompatButton>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnMultiple"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/btn_outside_style_dark"
+                    android:text="×"
+                    android:textColor="@color/darkModeText"
+                    android:textSize="36sp"
+                    android:onClick="onClickOperator"/>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:background="@drawable/ellipse_yellow"
-                android:text="%"
-                android:textColor="#FFFFFF"
-                android:textSize="36sp"
-                android:onClick="onClickOperator"/>
+                android:layout_marginTop="10dp">
 
-            <Button
-                android:id="@+id/buttonDelete"
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn4"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/btn_inside_style_dark"
+                    android:text="4"
+                    android:textColor="@color/darkModeText"
+                    android:textSize="36sp"
+                    android:onClick="onClickNumbering"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn5"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/btn_inside_style_dark"
+                    android:text="5"
+                    android:textColor="@color/darkModeText"
+                    android:textSize="36sp"
+                    android:onClick="onClickNumbering"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn6"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/btn_inside_style_dark"
+                    android:text="6"
+                    android:textColor="@color/darkModeText"
+                    android:textSize="36sp"
+                    android:onClick="onClickNumbering">
+
+                </androidx.appcompat.widget.AppCompatButton>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnMinus"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/btn_outside_style_dark"
+                    android:text="-"
+                    android:textColor="@color/darkModeText"
+                    android:textSize="36sp"
+                    android:onClick="onClickOperator"/>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:background="@drawable/ellipse_yellow"
-                android:text="CR"
-                android:textColor="#FFFFFF"
-                android:textSize="36sp"
-                android:onClick="onClickOperator"/>
+                android:layout_marginTop="10dp">
 
-            <Button
-                android:id="@+id/buttonDivide"
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn1"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/btn_inside_style_dark"
+                    android:text="1"
+                    android:textColor="@color/darkModeText"
+                    android:textSize="36sp"
+                    android:onClick="onClickNumbering"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn2"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/btn_inside_style_dark"
+                    android:text="2"
+                    android:textColor="@color/darkModeText"
+                    android:textSize="36sp"
+                    android:onClick="onClickNumbering" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn3"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/btn_inside_style_dark"
+                    android:text="3"
+                    android:textColor="@color/darkModeText"
+                    android:textSize="36sp"
+                    android:onClick="onClickNumbering">
+
+                </androidx.appcompat.widget.AppCompatButton>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnPlus"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/btn_outside_style_dark"
+                    android:text="+"
+                    android:textColor="@color/darkModeText"
+                    android:textSize="36sp"
+                    android:onClick="onClickOperator"/>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:background="@drawable/ellipse_yellow"
-                android:text="/"
-                android:textColor="#FFFFFF"
-                android:textSize="36sp"
-                android:onClick="onClickOperator"/>
+                android:layout_marginTop="10dp">
 
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn0"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/btn_inside_style_dark"
+                    android:text="0"
+                    android:textColor="@color/darkModeText"
+                    android:textSize="36sp"
+                    android:onClick="onClickNumbering" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnComma"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/btn_inside_style_dark"
+                    android:text=","
+                    android:textColor="@color/darkModeText"
+                    android:textSize="36sp" 
+                    android:onClick="onClickNumbering"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnSum"
+                    android:layout_width="165dp"
+                    android:layout_height="80dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/btn_equals_style_dark"
+                    android:text="="
+                    android:textColor="@color/darkModeText"
+                    android:textSize="36sp"
+                    android:onClick="onClickOperator" />
+            </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/button7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ellipse_number"
-                android:onClick="onClickNumbering"
-                android:text="7"
-                android:textColor="#FFFFFF"
-                android:textSize="36sp" />
+    </RelativeLayout>
 
-            <Button
-                android:id="@+id/button8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:background="@drawable/ellipse_number"
-                android:onClick="onClickNumbering"
-                android:text="8"
-                android:textColor="#FFFFFF"
-                android:textSize="36sp" />
-
-            <Button
-                android:id="@+id/button9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:background="@drawable/ellipse_number"
-                android:onClick="onClickNumbering"
-                android:text="9"
-                android:textColor="#FFFFFF"
-                android:textSize="36sp" />
-
-            <Button
-                android:id="@+id/buttonMultiple"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:background="@drawable/ellipse_yellow"
-                android:text="*"
-                android:textColor="#FFFFFF"
-                android:textSize="36sp"
-                android:onClick="onClickOperator"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ellipse_number"
-                android:onClick="onClickNumbering"
-                android:text="4"
-                android:textColor="#FFFFFF"
-                android:textSize="36sp" />
-
-            <Button
-                android:id="@+id/button5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:background="@drawable/ellipse_number"
-                android:onClick="onClickNumbering"
-                android:text="5"
-                android:textColor="#FFFFFF"
-                android:textSize="36sp" />
-
-            <Button
-                android:id="@+id/button6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:background="@drawable/ellipse_number"
-                android:onClick="onClickNumbering"
-                android:text="6"
-                android:textColor="#FFFFFF"
-                android:textSize="36sp" />
-
-            <Button
-                android:id="@+id/buttonSubtract"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:background="@drawable/ellipse_yellow"
-                android:text="-"
-                android:textColor="#FFFFFF"
-                android:textSize="36sp"
-                android:onClick="onClickOperator"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/button1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ellipse_number"
-                android:onClick="onClickNumbering"
-                android:text="1"
-                android:textColor="#FFFFFF"
-                android:textSize="36sp" />
-
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:background="@drawable/ellipse_number"
-                android:onClick="onClickNumbering"
-                android:text="2"
-                android:textColor="#FFFFFF"
-                android:textSize="36sp" />
-
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:background="@drawable/ellipse_number"
-                android:onClick="onClickNumbering"
-                android:text="3"
-                android:textColor="#FFFFFF"
-                android:textSize="36sp" />
-
-            <Button
-                android:id="@+id/buttonAdd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:background="@drawable/ellipse_yellow"
-                android:text="+"
-                android:textColor="#FFFFFF"
-                android:textSize="36sp"
-                android:onClick="onClickOperator"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/button0"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ellipse_number"
-                android:onClick="onClickNumbering"
-                android:text="0"
-                android:textColor="#FFFFFF"
-                android:textSize="36sp" />
-
-            <Button
-                android:id="@+id/buttonComma"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:background="@drawable/ellipse_number"
-                android:onClick="onClickNumbering"
-                android:text="."
-                android:textColor="#FFFFFF"
-                android:textSize="36sp" />
-
-            <Button
-                android:id="@+id/buttonSum"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_weight="1"
-                android:background="@drawable/yellow_sum"
-                android:text="="
-                android:textColor="#FFFFFF"
-                android:textSize="36sp"
-                android:onClick="onClickOperator"/>
-        </LinearLayout>
-
-    </LinearLayout>
 
     <HorizontalScrollView
         android:id="@+id/hzw"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="start|end"
-        android:layout_marginEnd="10dp"
         android:fillViewport="true"
-        android:scrollbarAlwaysDrawHorizontalTrack="true"
-        app:layout_constraintBottom_toTopOf="@+id/boardBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:paddingTop="@android:dimen/app_icon_size">
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textView2"
+            android:maxLines="1"
+            android:scrollHorizontally="true"
 
-        <TextView
-            android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:gravity="end"
-            android:text="0"
-            android:maxLines="1"
-            android:textColor="@android:color/white"
-            android:textSize="72sp"
-            android:textStyle="bold" />
+            android:textAlignment="textEnd"
+            android:textColor="@color/darkModeText"
+            android:textSize="36sp" />
     </HorizontalScrollView>
-
 
     <HorizontalScrollView
         android:id="@+id/hzw2"
-        android:layout_width="0dp"
+        android:layout_below="@+id/hzw"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="start|end"
-        android:layout_marginEnd="10dp"
-        android:fillViewport="true"
-        android:scrollbarAlwaysDrawHorizontalTrack="true"
-        app:layout_constraintBottom_toTopOf="@+id/hzw"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent">
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="27dp"
+        android:fillViewport="true">
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textView"
+            android:maxLines="1"
+            android:scrollHorizontally="true"
 
-        <TextView
-            android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:gravity="end"
-            android:maxLines="1"
-            android:textColor="@android:color/white"
-            android:textSize="40sp"
-            android:textStyle="bold"/>
+            android:text="0"
+            android:textAlignment="textEnd"
+            android:textColor="@color/darkModeText"
+            android:textSize="64sp"/>
     </HorizontalScrollView>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
