@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
 //            inputOutput.setTextSize(TypedValue.COMPLEX_UNIT_SP,62);
 //        }
 
-        //check if char have value
+        //check if char have value operator or not and change to empty in output textView (inputOutput)
         if(operatorSet != '\0'){
             displayNumber = "";
             operatorSet = '\0';
@@ -164,19 +164,23 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         HorizontalScrollView hrw2 = binding.hzw2;
         hrw2.fullScroll(View.FOCUS_RIGHT);
 
-
+        // make each tens,hundred,million,etc in digit will have dot to make easier readable
         DecimalFormat dfDigit = new DecimalFormat("#,###");
         // numbering button had a same behavior
         for (int i = 0; i < 10; i++) {
+            // get id button number
             int id = getResources().getIdentifier("btn"+i, "id", getPackageName());
+            // check id and not contains comma
             if(v.getId() == id && !displayNumber.contains(",")){
                 if(displayNumber.equals("0")){
                     displayNumber = "";
                 }else if(displayNumber.contains(".")){
                     displayNumber = displayNumber.replace(".","");
                 }
+                // output to textView
                 inputOutput.setText(dfDigit.format(Long.parseLong(displayNumber + i)));
                 break;
+            // check id and contains comma
             }else if(v.getId() == id && displayNumber.contains(",")){
                 if(displayNumber.equals("0")){
                     displayNumber = "";
@@ -184,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
                 inputOutput.setText(displayNumber + i);
                 break;
             }
-            //
+            // check if press btn comma and the comma no multi
             if(v.getId() == R.id.btnComma && !displayNumber.contains(",")){
                 inputOutput.setText(displayNumber + ",");
                 break;
@@ -197,8 +201,10 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
 
 
 
-    // check operator for sum
+    // num is first number will operator
+    // ans is equals of number have operator or result
     private double num,ans;
+    // sumType for checking operator for sum button
     private char sumType;
     private boolean sumInOperator = false;
 
@@ -209,6 +215,7 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         try {
            String textInputOutput = inputOutput.getText().toString().replace(".","").replace(",",".");
            String textOperator = operatorView.getText().toString();
+           // df for handle each digit result if contain comma or not
            DecimalFormat df = new DecimalFormat();
             switch (v.getId()){
                 case R.id.btnC:
@@ -220,14 +227,18 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
                     operatorView.setText("");
                     break;
                 case R.id.btnDelete:
+                    // get length from all text contains
                     int length = inputOutput.getText().length();
+                    // and delete one by one
                     int number = length-1;
-
+                    // check length of text not empty
                     if(length > 1){
+                        // input the text to StringBuilder for easier to get or delete each char contains in string
                         StringBuilder willDelete = new StringBuilder(inputOutput.getText().toString());
                         willDelete.deleteCharAt(number);
                         String store = willDelete.toString();
                         inputOutput.setText(store);
+                    // check if only contains 1 char or number, and changing to zero in output textView
                     }else if(length == 1){
                         sumInOperator = false;
                         sumType = '\0';
@@ -239,23 +250,28 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
                     break;
 
                 case R.id.btnPlus:
-                    // checked last char for add symbol cannot duplicate in same times
-
+            /* command in other case operator is same */
+                    // if user secondary or next clickinsg the button and sumType is + this condition will worked
                     if(sumInOperator && sumType == '+'){
                         num += Double.parseDouble(textInputOutput);
                         inputOutput.setText(df.format(num));
+                    // if user click other operator like minus,multiply, this condition will work
                     }else if(sumType != '+'){
-                        double result = otherOperatorInOther.getResult(sumType,num,Double.parseDouble(textInputOutput));
+                        // and check again into other class the operator is +,-.*./ or not
+                        double result = otherOperatorInOther.getResult(sumType,num,Double.parseDouble(textInputOutput)); // result of operator
                         num = result;
                         inputOutput.setText(df.format(result));
+                    // if the user first click the operator
                     }else{
                         sumInOperator = true;
                         num = Double.parseDouble(textInputOutput);
                     }
+                    // output to textView2
                     operatorView.setText(textOperator + textInputOutput.replace(".",",") + " + ");
                     operatorSet = '+';
                     sumType = '+';
                     break;
+
                 case R.id.btnMinus:
 //                    num = Double.parseDouble(textInputOutput);
                     if(sumInOperator && sumType == '-'){
@@ -326,7 +342,9 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
 
                     switch (sumType){
                         case '+':
+                            // operation the result (ans) in current InputOutput text or textView id
                             ans = num + Double.parseDouble(textInputOutput);
+                            // output this
                             inputOutput.setText(df.format(ans));
                             operatorView.setText("");
                             operatorSet = '+';
