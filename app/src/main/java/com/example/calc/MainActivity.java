@@ -20,7 +20,7 @@ import static com.example.calc.R.drawable;
 import com.example.calc.databinding.ActivityMainBinding;
 import java.text.DecimalFormat;
 
-public class MainActivity extends AppCompatActivity implements ThemeSwitch {
+public class MainActivity extends AppCompatActivity implements View.OnLongClickListener, Themes {
     ActivityMainBinding binding;
     // layout var
     private RelativeLayout bgMain;
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements ThemeSwitch {
     private AppCompatTextView operatorView;
 
 
-    public static String THEME_PREFERENCE = "themePreference";
+    public static String THEME_PREFS = "themePrefs";
     public static String KEY_THEME_UPDATE = "themeMode";
     private boolean isToDarkMode;
 
@@ -44,80 +44,33 @@ public class MainActivity extends AppCompatActivity implements ThemeSwitch {
     private AppCompatButton btnPlus;
     private AppCompatButton btnSum;
 
-    // change theme code
-
-//    @Override
-//    public boolean onLongClick(View v) {
-//
-//        switch(v.getId()){
-//            // light mode
-//            case R.id.btnC:
-//                if(isToDarkMode){
-//                    isToDarkMode = false;
-//                    saveTheme();
-//                }else{
-//                    isToDarkMode = true;
-//                    saveTheme();
-//                }
-//                break;
-//        }
-//
-//        viewThemeUpdate();
-//        return true;
-//    }
-
-
-    // main initial code
+// ******* change theme code
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public boolean onLongClick(View v) {
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        switch(v.getId()){
+            // light mode
+            case R.id.btnC:
+                if(isToDarkMode){
+                    isToDarkMode = false;
+                    saveTheme();
 
-
-        bgMain = binding.bgMain;
-        btnClear = binding.btnC;
-        btnDelete = binding.btnDelete;
-        btnDivide = binding.btnDivide;
-        btnPercent = binding.btnPercent;
-        btnPlus = binding.btnPlus;
-        btnMinus = binding.btnMinus;
-        btnMultiple = binding.btnMultiple;
-        btnSum = binding.btnSum;
-
-//        btnClear.setOnLongClickListener(this);
-
-        btnClear.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                switch(v.getId()){
-                    case R.id.btnC:
-                        if(isToDarkMode){
-                            isToDarkMode = false;
-                            saveTheme();
-                        }else{
-                            isToDarkMode = true;
-                            saveTheme();
-                        }
-                        break;
+                }else{
+                    isToDarkMode = true;
+                    saveTheme();
                 }
-
-                viewThemeUpdate();
-                return true;
-            }
-        });
-        loadTheme();
+                break;
+        }
 
         viewThemeUpdate();
-
+        return true;
     }
 
     @Override
     public void isToLightMode() {
         bgMain.setBackgroundResource(lightModeBG);
-        inputOutput.setTextColor(getResources().getColor(lightModeText));
-        operatorView.setTextColor(getResources().getColor(lightModeText));
+        inputOutput.setTextColor(getResources().getColor(lightModeText)); // inputOutput textView
+        operatorView.setTextColor(getResources().getColor(lightModeText)); // operator textView
         btnClear.setBackgroundResource(drawable.btn_outside_style_light);
         btnDelete.setBackgroundResource(drawable.btn_outside_style_light);
         btnPercent.setBackgroundResource(drawable.btn_outside_style_light);
@@ -165,43 +118,71 @@ public class MainActivity extends AppCompatActivity implements ThemeSwitch {
         binding.btn8.setBackgroundResource(drawable.btn_inside_style_dark);
         binding.btn9.setBackgroundResource(drawable.btn_inside_style_dark);
     }
-
+    // saved current theme preference
     public void saveTheme(){
-        SharedPreferences sharedPreferences = getSharedPreferences(THEME_PREFERENCE,MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(THEME_PREFS,MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         editor.putBoolean(KEY_THEME_UPDATE,isToDarkMode);
 
         editor.apply();
     }
-
+    // attention MODE_PRIVATE use so that other apps can't access save theme
+    // get current theme
     @Override
     public void loadTheme() {
-        SharedPreferences sharedPreferences = getSharedPreferences(THEME_PREFERENCE,MODE_PRIVATE);
-        isToDarkMode = sharedPreferences.getBoolean(KEY_THEME_UPDATE,true);
+        isToDarkMode = getSharedPreferences(THEME_PREFS, MODE_PRIVATE).getBoolean(KEY_THEME_UPDATE,true);
     }
-
+    // set theme
     @Override
     public void viewThemeUpdate() {
         if(isToDarkMode){
             isToDarkMode();
 
-        }else if(!isToDarkMode){
+        }else{
             isToLightMode();
         }
     }
 
 
+// ******** main code
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        // button operator declare
+        bgMain = binding.bgMain;
+        btnClear = binding.btnC;
+        btnDelete = binding.btnDelete;
+        btnDivide = binding.btnDivide;
+        btnPercent = binding.btnPercent;
+        btnPlus = binding.btnPlus;
+        btnMinus = binding.btnMinus;
+        btnMultiple = binding.btnMultiple;
+        btnSum = binding.btnSum;
+
+        // textView declare
+        inputOutput = binding.textView;
+        operatorView = binding.textView2;
+
+        btnClear.setOnLongClickListener(this);
+
+        loadTheme();
+        viewThemeUpdate();
+
+    }
 
 
+
+// ********logic calculator code
 
     // var for check mode operator
     private char operatorSet = '\0';
-
     // logic when clicking number
     public void onClickNumbering(View v){
-        inputOutput = binding.textView;
-        operatorView = binding.textView2;
 
         String displayNumber = inputOutput.getText().toString();
         // change size text number if length number is 12
