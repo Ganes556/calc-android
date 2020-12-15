@@ -3,10 +3,10 @@ package com.example.calc;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatTextView;
-import androidx.core.content.ContextCompat;
 
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.HorizontalScrollView;
 import android.widget.RelativeLayout;
@@ -18,24 +18,21 @@ import static com.example.calc.R.color.lightModeText;
 import static com.example.calc.R.drawable;
 
 import com.example.calc.databinding.ActivityMainBinding;
-
 import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.util.Locale;
 
-
-public class MainActivity extends AppCompatActivity implements View.OnLongClickListener {
+public class MainActivity extends AppCompatActivity implements ThemeSwitch {
     ActivityMainBinding binding;
     // layout var
     private RelativeLayout bgMain;
-    private RelativeLayout boardOfBtn;
 
     // textView var
     private AppCompatTextView inputOutput;
     private AppCompatTextView operatorView;
 
-    // called class ThemeSwitch
-    private final ThemeSwitch themeSwitch = new ThemeSwitch();
+
+    public static String THEME_PREFERENCE = "themePreference";
+    public static String KEY_THEME_UPDATE = "themeMode";
+    private boolean isToDarkMode;
 
     // button operator var
     private AppCompatButton btnClear;
@@ -48,70 +45,26 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
     private AppCompatButton btnSum;
 
     // change theme code
-    @Override
-    public boolean onLongClick(View v) {
 
-        switch(v.getId()){
-            // light mode
-            case R.id.btnC:
-                if(themeSwitch.isToLightMode()){
-                    themeSwitch.isToDarkMode(false);
-                    bgMain.setBackgroundResource(lightModeBG);
-                    inputOutput.setTextColor(getResources().getColor(lightModeText));
-                    operatorView.setTextColor(getResources().getColor(lightModeText));
-                    btnClear.setBackgroundResource(drawable.btn_outside_style_light);
-                    btnDelete.setBackgroundResource(drawable.btn_outside_style_light);
-                    btnPercent.setBackgroundResource(drawable.btn_outside_style_light);
-                    btnMultiple.setBackgroundResource(drawable.btn_outside_style_light);
-                    btnMinus.setBackgroundResource(drawable.btn_outside_style_light);
-                    btnDivide.setBackgroundResource(drawable.btn_outside_style_light);
-                    btnPlus.setBackgroundResource(drawable.btn_outside_style_light);
-                    btnSum.setBackgroundResource(drawable.btn_equals_style_light);
-                    binding.btn0.setBackgroundResource(drawable.btn_inside_style_light);
-                    binding.btnComma.setBackgroundResource(drawable.btn_inside_style_light);
-                    binding.btn1.setBackgroundResource(drawable.btn_inside_style_light);
-                    binding.btn2.setBackgroundResource(drawable.btn_inside_style_light);
-                    binding.btn3.setBackgroundResource(drawable.btn_inside_style_light);
-                    binding.btn4.setBackgroundResource(drawable.btn_inside_style_light);
-                    binding.btn5.setBackgroundResource(drawable.btn_inside_style_light);
-                    binding.btn6.setBackgroundResource(drawable.btn_inside_style_light);
-                    binding.btn7.setBackgroundResource(drawable.btn_inside_style_light);
-                    binding.btn8.setBackgroundResource(drawable.btn_inside_style_light);
-                    binding.btn9.setBackgroundResource(drawable.btn_inside_style_light);
-
-                }else{
-                    themeSwitch.isToDarkMode(true);
-                    bgMain.setBackgroundResource(darkModeBG);
-                    inputOutput.setTextColor(getResources().getColor(darkModeText));
-                    operatorView.setTextColor(getResources().getColor(darkModeText));
-                    btnClear.setBackgroundResource(drawable.btn_outside_style_dark);
-                    btnDelete.setBackgroundResource(drawable.btn_outside_style_dark);
-                    btnPercent.setBackgroundResource(drawable.btn_outside_style_dark);
-                    btnMultiple.setBackgroundResource(drawable.btn_outside_style_dark);
-                    btnMinus.setBackgroundResource(drawable.btn_outside_style_dark);
-                    btnDivide.setBackgroundResource(drawable.btn_outside_style_dark);
-                    btnPlus.setBackgroundResource(drawable.btn_outside_style_dark);
-                    btnSum.setBackgroundResource(drawable.btn_equals_style_dark);
-                    btnSum.setBackgroundResource(drawable.btn_equals_style_dark);
-                    binding.btn0.setBackgroundResource(drawable.btn_inside_style_dark);
-                    binding.btnComma.setBackgroundResource(drawable.btn_inside_style_dark);
-                    binding.btn1.setBackgroundResource(drawable.btn_inside_style_dark);
-                    binding.btn2.setBackgroundResource(drawable.btn_inside_style_dark);
-                    binding.btn3.setBackgroundResource(drawable.btn_inside_style_dark);
-                    binding.btn4.setBackgroundResource(drawable.btn_inside_style_dark);
-                    binding.btn5.setBackgroundResource(drawable.btn_inside_style_dark);
-                    binding.btn6.setBackgroundResource(drawable.btn_inside_style_dark);
-                    binding.btn7.setBackgroundResource(drawable.btn_inside_style_dark);
-                    binding.btn8.setBackgroundResource(drawable.btn_inside_style_dark);
-                    binding.btn9.setBackgroundResource(drawable.btn_inside_style_dark);
-
-                }
-
-                break;
-
-        }
-        return false;
-    }
+//    @Override
+//    public boolean onLongClick(View v) {
+//
+//        switch(v.getId()){
+//            // light mode
+//            case R.id.btnC:
+//                if(isToDarkMode){
+//                    isToDarkMode = false;
+//                    saveTheme();
+//                }else{
+//                    isToDarkMode = true;
+//                    saveTheme();
+//                }
+//                break;
+//        }
+//
+//        viewThemeUpdate();
+//        return true;
+//    }
 
 
     // main initial code
@@ -124,7 +77,6 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
 
 
         bgMain = binding.bgMain;
-        boardOfBtn = binding.boardBtn;
         btnClear = binding.btnC;
         btnDelete = binding.btnDelete;
         btnDivide = binding.btnDivide;
@@ -133,9 +85,115 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         btnMinus = binding.btnMinus;
         btnMultiple = binding.btnMultiple;
         btnSum = binding.btnSum;
-        btnClear.setOnLongClickListener(this);
+
+//        btnClear.setOnLongClickListener(this);
+
+        btnClear.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                switch(v.getId()){
+                    case R.id.btnC:
+                        if(isToDarkMode){
+                            isToDarkMode = false;
+                            saveTheme();
+                        }else{
+                            isToDarkMode = true;
+                            saveTheme();
+                        }
+                        break;
+                }
+
+                viewThemeUpdate();
+                return true;
+            }
+        });
+        loadTheme();
+
+        viewThemeUpdate();
 
     }
+
+    @Override
+    public void isToLightMode() {
+        bgMain.setBackgroundResource(lightModeBG);
+        inputOutput.setTextColor(getResources().getColor(lightModeText));
+        operatorView.setTextColor(getResources().getColor(lightModeText));
+        btnClear.setBackgroundResource(drawable.btn_outside_style_light);
+        btnDelete.setBackgroundResource(drawable.btn_outside_style_light);
+        btnPercent.setBackgroundResource(drawable.btn_outside_style_light);
+        btnMultiple.setBackgroundResource(drawable.btn_outside_style_light);
+        btnMinus.setBackgroundResource(drawable.btn_outside_style_light);
+        btnDivide.setBackgroundResource(drawable.btn_outside_style_light);
+        btnPlus.setBackgroundResource(drawable.btn_outside_style_light);
+        btnSum.setBackgroundResource(drawable.btn_equals_style_light);
+        binding.btn0.setBackgroundResource(drawable.btn_inside_style_light);
+        binding.btnComma.setBackgroundResource(drawable.btn_inside_style_light);
+        binding.btn1.setBackgroundResource(drawable.btn_inside_style_light);
+        binding.btn2.setBackgroundResource(drawable.btn_inside_style_light);
+        binding.btn3.setBackgroundResource(drawable.btn_inside_style_light);
+        binding.btn4.setBackgroundResource(drawable.btn_inside_style_light);
+        binding.btn5.setBackgroundResource(drawable.btn_inside_style_light);
+        binding.btn6.setBackgroundResource(drawable.btn_inside_style_light);
+        binding.btn7.setBackgroundResource(drawable.btn_inside_style_light);
+        binding.btn8.setBackgroundResource(drawable.btn_inside_style_light);
+        binding.btn9.setBackgroundResource(drawable.btn_inside_style_light);
+    }
+
+    @Override
+    public void isToDarkMode() {
+        bgMain.setBackgroundResource(darkModeBG);
+        inputOutput.setTextColor(getResources().getColor(darkModeText));
+        operatorView.setTextColor(getResources().getColor(darkModeText));
+        btnClear.setBackgroundResource(drawable.btn_outside_style_dark);
+        btnDelete.setBackgroundResource(drawable.btn_outside_style_dark);
+        btnPercent.setBackgroundResource(drawable.btn_outside_style_dark);
+        btnMultiple.setBackgroundResource(drawable.btn_outside_style_dark);
+        btnMinus.setBackgroundResource(drawable.btn_outside_style_dark);
+        btnDivide.setBackgroundResource(drawable.btn_outside_style_dark);
+        btnPlus.setBackgroundResource(drawable.btn_outside_style_dark);
+        btnSum.setBackgroundResource(drawable.btn_equals_style_dark);
+        btnSum.setBackgroundResource(drawable.btn_equals_style_dark);
+        binding.btn0.setBackgroundResource(drawable.btn_inside_style_dark);
+        binding.btnComma.setBackgroundResource(drawable.btn_inside_style_dark);
+        binding.btn1.setBackgroundResource(drawable.btn_inside_style_dark);
+        binding.btn2.setBackgroundResource(drawable.btn_inside_style_dark);
+        binding.btn3.setBackgroundResource(drawable.btn_inside_style_dark);
+        binding.btn4.setBackgroundResource(drawable.btn_inside_style_dark);
+        binding.btn5.setBackgroundResource(drawable.btn_inside_style_dark);
+        binding.btn6.setBackgroundResource(drawable.btn_inside_style_dark);
+        binding.btn7.setBackgroundResource(drawable.btn_inside_style_dark);
+        binding.btn8.setBackgroundResource(drawable.btn_inside_style_dark);
+        binding.btn9.setBackgroundResource(drawable.btn_inside_style_dark);
+    }
+
+    public void saveTheme(){
+        SharedPreferences sharedPreferences = getSharedPreferences(THEME_PREFERENCE,MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putBoolean(KEY_THEME_UPDATE,isToDarkMode);
+
+        editor.apply();
+    }
+
+    @Override
+    public void loadTheme() {
+        SharedPreferences sharedPreferences = getSharedPreferences(THEME_PREFERENCE,MODE_PRIVATE);
+        isToDarkMode = sharedPreferences.getBoolean(KEY_THEME_UPDATE,true);
+    }
+
+    @Override
+    public void viewThemeUpdate() {
+        if(isToDarkMode){
+            isToDarkMode();
+
+        }else if(!isToDarkMode){
+            isToLightMode();
+        }
+    }
+
+
+
+
 
     // var for check mode operator
     private char operatorSet = '\0';
@@ -147,9 +205,9 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
 
         String displayNumber = inputOutput.getText().toString();
         // change size text number if length number is 12
-//        if(displayNumber.length() == 12){
-//            inputOutput.setTextSize(TypedValue.COMPLEX_UNIT_SP,62);
-//        }
+            //        if(displayNumber.length() == 12){
+            //            inputOutput.setTextSize(TypedValue.COMPLEX_UNIT_SP,62);
+            //        }
 
         //check if char have value operator or not and change to empty in output textView (inputOutput)
         if(operatorSet != '\0'){

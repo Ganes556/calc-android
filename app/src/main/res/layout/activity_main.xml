@@ -13,7 +13,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/hzw2"
-        android:id="@+id/boardBtn"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true">
 
@@ -272,7 +271,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fillViewport="true"
-        android:paddingTop="@android:dimen/app_icon_size">
+        android:paddingTop="@android:dimen/app_icon_size"> <!--   menambahkan ini agar paddingnya sesuai device     -->
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textView2"
             android:maxLines="1"
