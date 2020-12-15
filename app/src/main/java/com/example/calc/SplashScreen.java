@@ -1,10 +1,7 @@
 package com.example.calc;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import com.example.calc.databinding.ActivitySplashScreenBinding;
@@ -21,7 +18,7 @@ public class SplashScreen extends AppCompatActivity implements Themes{
         super.onCreate(savedInstanceState);
         binding = ActivitySplashScreenBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        
+
         loadTheme();
 
         viewThemeUpdate();
